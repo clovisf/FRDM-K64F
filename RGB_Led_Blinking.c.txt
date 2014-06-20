@@ -1,0 +1,51 @@
+//  Created by Clovis Fritzen, in July 20th, 2014
+//
+//  This program bliks sequentially every color
+//  of a RGB LED in the Freescale Freedom FRDM-K64F 
+//  development board. 
+//
+// It was developed in the Mbed online development
+// tool. 
+
+#include "mbed.h"
+
+DigitalOut RedLed(LED1); // Red led
+DigitalOut GreenLed(LED2); // Green led
+DigitalOut BlueLed(LED3); // Blue led
+int count=0; // Cycles counter
+
+int main() {
+    
+  while(1){ // Loop forever
+             
+    if (count > 1000000) {
+        RedLed = 1;
+        GreenLed = 1;
+        BlueLed = 1;
+        count= 0;
+        
+        }else {
+            if (count < 333333){
+                RedLed = 0; // Turns Red led ON (inverse logic)
+                GreenLed = 1;
+                BlueLed = 1;
+                count= count+1;
+                }else {
+                    if (count < 666666){
+                        RedLed = 1;
+                        GreenLed = 0; // Turns Green led ON (inverse logic)
+                        BlueLed = 1;
+                        count= count+1;
+                        } else {
+                            RedLed = 1;
+                            GreenLed = 1;
+                            BlueLed = 0; // Turns Blue led ON (inverse logic)
+                            count= count+1;
+                            }
+                    }
+            
+            }
+        
+} 
+
+}
