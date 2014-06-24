@@ -1,0 +1,35 @@
+#include "mbed.h"
+#include "SDFileSystem.h"
+ 
+SDFileSystem sd(PTE3, PTE1, PTE2, PTE4, "sd"); //MOSI, MISO, SCLK, SSEL. Tested on K64F, correct pins.
+AnalogIn LM35(PTB2);
+int count=0;
+
+ 
+int main() {
+    
+    printf("Hello World!\n");   
+ 
+    mkdir("/sd/mydir", 0777);
+    
+    FILE *fp = fopen("/sd/mydir/sdtest.txt", "w");
+    if(fp == NULL) {
+        error("Could not open file for write\n");
+        }
+    while (1) {
+    
+    if (count < 10000000){
+        count++;
+        } else{    
+    FILE *fp = fopen("/sd/mydir/data001.csv", "a");
+    if(fp == NULL) {
+        error("Could not open file for write\n");
+    }
+    
+    fprintf(fp, "%f\r,",333.333*LM35.read());
+    fclose(fp);  
+    printf("Goodbye World!\n");
+    count=0;
+    }
+    }
+    }
