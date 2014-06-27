@@ -21,7 +21,7 @@ int main() {
     
     FILE *fp = fopen("/sd/mydir/data001.csv", "w");
     if(fp == NULL) {
-        error("Could not open file for write\n");
+        error("Could not open file for write \n");
         RedLed = 0;
         GreenLed = 1;
         Blueled= 1;
